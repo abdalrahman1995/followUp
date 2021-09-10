@@ -98,7 +98,8 @@ class _CustInfoState extends State<CustInfo> {
                                   child: Text('Date Start:'))),
                           Expanded(
                               child: Container(
-                                  child: Text(widget.list['updated']))),
+                                  child: Text(widget.list['updated']
+                                      .substring(0, 10)))),
                         ],
                       ),
                     ),
@@ -357,7 +358,7 @@ class _CustInfoState extends State<CustInfo> {
                                                             EdgeInsets.all(5),
                                                         child: Text(
                                                           list[index]
-                                                              ['content'],
+                                                              ['cust_name'],
                                                           textAlign:
                                                               TextAlign.center,
                                                           overflow:
@@ -385,8 +386,8 @@ class _CustInfoState extends State<CustInfo> {
                                                         padding:
                                                             EdgeInsets.all(5),
                                                         child: Text(
-                                                          list[index]
-                                                              ['updated'],
+                                                          list[index]['updated']
+                                                              .substring(0, 10),
                                                           textAlign:
                                                               TextAlign.center,
                                                           overflow:

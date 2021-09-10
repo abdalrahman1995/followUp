@@ -101,7 +101,7 @@ class _NewClientState extends State<NewClient> {
 
     if (json.decode(response.body) == 0) {
       Fluttertoast.showToast(
-          msg: "Data successfully created.", toastLength: Toast.LENGTH_SHORT);
+          msg: "Data successfully upladed.", toastLength: Toast.LENGTH_SHORT);
       Navigator.of(context).pushNamed('home');
     } else {
       Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);

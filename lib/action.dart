@@ -6,10 +6,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'action_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'navigationbar.dart';
 
 String idUser = '';
+var allAction;
+List buildData = [];
 
 class ActionList extends StatefulWidget {
   ActionList({Key? key}) : super(key: key);
@@ -19,14 +20,22 @@ class ActionList extends StatefulWidget {
 }
 
 Future getAllData(id) async {
-  var response = await http.post(
-      Uri.https('followup.my', '/process/app/p.action_table_app.php'),
-      body: {"id_user": id});
-  // print(response.body);
-  if (response.body.isEmpty) {
-    return null;
+  if (allAction.length == 0) {
+    var response = await http.post(
+        Uri.https('followup.my', '/process/app/p.action_table_app.php'),
+        body: {"id_user": id});
+    // print(response.body);
+    if (response.body.isEmpty) {
+      return null;
+    } else {
+      allAction = json.decode(response.body);
+      buildData = allAction;
+      return json.decode(response.body);
+    }
   } else {
-    return json.decode(response.body);
+    print('alternate build running');
+    print(buildData);
+    return buildData;
   }
 }
 
@@ -36,13 +45,22 @@ class _ActionListState extends State<ActionList> {
     style: TextStyle(fontWeight: FontWeight.bold),
   );
   Icon actionIcon = new Icon(Icons.search);
-  late TextEditingController search;
+  late TextEditingController _searchController;
+
   @override
   void initState() {
     getValidtionData();
     idUser = '1';
-    search = new TextEditingController();
     super.initState();
+    _searchController = TextEditingController();
+    _searchController.addListener(_printLatestValue);
+    allAction = [];
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   Future getValidtionData() async {
@@ -115,7 +133,6 @@ class _ActionListState extends State<ActionList> {
               Expanded(
                 child: FutureBuilder(
                   future: getAllData(idUser),
-                  // initialData: InitialData,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasError) print(snapshot.error);
                     return snapshot.hasData
@@ -183,8 +200,7 @@ class _ActionListState extends State<ActionList> {
                                                       padding: EdgeInsets.only(
                                                           left: 10, top: 10),
                                                       child: Text(
-                                                        list[index]
-                                                            ['cust_name'],
+                                                        list[index]['type'],
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 16,
@@ -204,9 +220,10 @@ class _ActionListState extends State<ActionList> {
                                                       padding: EdgeInsets.only(
                                                           right: 30, top: 10),
                                                       child: Text(
-                                                        list[index]['medium'],
+                                                        list[index]
+                                                            ['cust_name'],
                                                         style: TextStyle(
-                                                            fontSize: 12,
+                                                            fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
@@ -231,7 +248,8 @@ class _ActionListState extends State<ActionList> {
                                                           top: 5,
                                                           bottom: 5),
                                                       child: Text(
-                                                        list[index]['follow'],
+                                                        list[index]['follow']
+                                                            .substring(0, 10),
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .blue[300],
@@ -240,6 +258,27 @@ class _ActionListState extends State<ActionList> {
                                                                     .bold),
                                                         textAlign:
                                                             TextAlign.left,
+                                                        overflow:
+                                                            TextOverflow.fade,
+                                                        softWrap: false,
+                                                      ),
+                                                    )),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          right: 20,
+                                                          top: 5,
+                                                          bottom: 5),
+                                                      child: Text(
+                                                        list[index]['medium'],
+                                                        style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         overflow:
                                                             TextOverflow.fade,
                                                         softWrap: false,
@@ -308,15 +347,17 @@ class _ActionListState extends State<ActionList> {
                   if (this.actionIcon.icon == Icons.search) {
                     this.actionIcon = new Icon(Icons.close);
                     this.appBarTitle = new TextField(
+                      controller: _searchController,
                       style: new TextStyle(
                         color: Colors.white,
                       ),
                       decoration: new InputDecoration(
                           prefixIcon:
                               new Icon(Icons.search, color: Colors.white),
-                          hintText: "Search on action...",
+                          hintText: "Search on actions...",
                           hintStyle: new TextStyle(color: Colors.white)),
-                      controller: search,
+
+                      // can add a trigger here where if i click search icon after entering any text, it prints that text, later i can replace with the correct search code
                     );
                   } else {
                     this.actionIcon = new Icon(Icons.search);
@@ -327,5 +368,34 @@ class _ActionListState extends State<ActionList> {
             ),
           ],
         ));
+  }
+
+  void _printLatestValue() {
+    // print('Second text field: ${_searchController.text}');
+    setState(() {
+      buildData = search(allAction, _searchController.text);
+    });
+  }
+
+  List search(var json, String searchText) {
+    print(json);
+    print(searchText);
+    List resultList = [];
+
+    if (searchText == '') {
+      return allAction;
+    } else {
+      for (var row in json) {
+        print(row);
+        for (var key in row.keys) {
+          // print(key);
+          // print(row[key]);
+          if (row[key].contains(searchText)) {
+            resultList.add(row);
+          }
+        }
+      }
+      return resultList;
+    }
   }
 }

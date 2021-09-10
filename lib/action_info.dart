@@ -86,7 +86,8 @@ class _ActionInfoState extends State<ActionInfo> {
                           Expanded(
                               flex: 2,
                               child: Container(
-                                  child: Text(widget.list['updated']))),
+                                  child: Text(widget.list['updated']
+                                      .substring(0, 10)))),
                         ],
                       ),
                     ),
@@ -205,25 +206,29 @@ class _ActionInfoState extends State<ActionInfo> {
                                 Color(0xFFE1F5FE),
                               ])),
                       height: 100,
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Expanded(
-                                  child: Container(
-                                      margin: EdgeInsets.only(left: 20),
-                                      child: Text(
-                                        'Content :',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ))),
-                              Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                      child: Text(widget.list['content']))),
-                            ],
-                          ),
+                          Expanded(
+                              child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Container(
+                                margin: EdgeInsets.only(left: 20),
+                                child: Text(
+                                  'Content :',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                          )),
+                          Expanded(
+                              flex: 2,
+                              child: SizedBox(
+                                  height: 225.0,
+                                  child: ListView(
+                                    children: [
+                                      Container(
+                                          child: Text(widget.list['content'])),
+                                    ],
+                                  ))),
                         ],
                       ),
                     ),

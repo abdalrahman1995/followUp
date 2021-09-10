@@ -94,8 +94,8 @@ class _NewActionState extends State<NewAction> {
 
     if (json.decode(response.body) == 0) {
       Fluttertoast.showToast(
-          msg: "Data successfully created.", toastLength: Toast.LENGTH_SHORT);
-      Navigator.of(context).pop();
+          msg: "Data successfully upladed.", toastLength: Toast.LENGTH_SHORT);
+      Navigator.of(context).pushNamed("action");
     } else {
       Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);
     }

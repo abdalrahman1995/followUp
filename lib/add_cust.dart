@@ -18,12 +18,10 @@ class AddCust extends StatefulWidget {
 
 class _AddCustState extends State<AddCust> {
   late TextEditingController company, name, hp, email, category;
-  String buttonText = '';
 
   @override
   void initState() {
     getValidtionData();
-    buttonText = "Create";
     idUser = '1';
     company = new TextEditingController();
     name = new TextEditingController();
@@ -171,11 +169,11 @@ class _AddCustState extends State<AddCust> {
                       ),
 
                       onPressed: () {
-                        updateche(idUser, buttonText);
+                        updateche(idUser, "Create");
                       },
                       // Refer step 3
                       child: Text(
-                        buttonText,
+                        'Create New Client',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,

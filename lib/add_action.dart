@@ -12,7 +12,6 @@ import 'dart:convert';
 var typeUpdate;
 var actionType;
 String idUser = '';
-String buttonText = '';
 
 class AddAction extends StatefulWidget {
   final Map<String, dynamic> list;
@@ -33,7 +32,6 @@ class _AddActionState extends State<AddAction> {
   void initState() {
     getValidtionData();
     idUser = '1';
-    buttonText = 'Create';
     comment = new TextEditingController();
 
     super.initState();
@@ -82,7 +80,7 @@ class _AddActionState extends State<AddAction> {
       "medium": actionType,
       "content": comment.text,
       "follow": formattedDate,
-      "button": buttonText,
+      "button": "Create",
     });
     print(response);
 
@@ -284,7 +282,7 @@ class _AddActionState extends State<AddAction> {
                             },
                             // Refer step 3
                             child: Text(
-                              buttonText,
+                              'Create New Action',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
