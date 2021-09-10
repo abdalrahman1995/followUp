@@ -17,7 +17,7 @@ class _ActionInfoState extends State<ActionInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarbuilder(widget.list['cust_name'] + "  " + "Details and"),
+      appBar: appbarbuilder(widget.list['cust_name'] + "  " + "Details "),
       drawer: MyDrawer(),
       bottomNavigationBar: MyNavigationBar('action'),
       body: Column(
