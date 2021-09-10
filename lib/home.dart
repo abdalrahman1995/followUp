@@ -9,6 +9,8 @@ import 'insert/new_client.dart';
 import 'navigationbar.dart';
 
 String idUser = '';
+var allCust;
+List buildData = [];
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -18,16 +20,27 @@ class Home extends StatefulWidget {
 }
 
 Future getAllData(id) async {
-  var response = await http.post(
-      Uri.https('followup.my', '/process/app/p.cust_table_app.php'),
-      body: {"id_user": id});
+  if(allCust.length == 0) {
+    print('run when allCust is empty');
+    var response = await http.post(
+        Uri.https('followup.my', '/process/app/p.cust_table_app.php'),
+        body: {"id_user": id});
 
-  // print(response.body);
-  if (response.body.isEmpty) {
-    return null;
+    // print(response.body);
+    if (response.body.isEmpty) {
+      return null;
+    } else {
+      // print(json.decode(response.body));
+      allCust = json.decode(response.body);
+      buildData = allCust;
+      return json.decode(response.body);
+    }
   } else {
-    return json.decode(response.body);
+    print('alternate build running');
+    print(buildData);
+    return buildData;
   }
+
 }
 
 class _HomeState extends State<Home> {
@@ -38,15 +51,25 @@ class _HomeState extends State<Home> {
   Icon actionIcon = new Icon(Icons.search);
   late TextEditingController _searchController;
 
+
   @override
   void initState() {
     getValidtionData();
     idUser = '0';
     super.initState();
     _searchController = TextEditingController();
+    _searchController.addListener(_printLatestValue);
+    allCust = [];
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   Future deleteData(String id) async {
+
     var response = await http
         .post(Uri.https('followup.my', '/process/app/p.delete.php'), body: {
       "id_cust": id,
@@ -434,5 +457,36 @@ class _HomeState extends State<Home> {
             ),
           ],
         ));
+  }
+
+  void _printLatestValue() {
+    // print('Second text field: ${_searchController.text}');
+    setState(() {
+      buildData = search(allCust, _searchController.text);
+    });
+
+  }
+
+  List search(var json, String searchText) {
+    print(json);
+    print(searchText);
+    List resultList = [];
+
+    if(searchText == '') {
+      return allCust;
+    } else {
+
+      for (var row in json) {
+        print(row);
+        for(var key in row.keys) {
+          // print(key);
+          // print(row[key]);
+          if(row[key].contains(searchText))  {
+            resultList.add(row);
+          }
+        }
+      }
+      return resultList;
+    }
   }
 }
