@@ -103,6 +103,7 @@ class _NewActionState extends State<NewAction> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60.0), // here the desired height
             child: AppBar(
@@ -139,20 +140,7 @@ class _NewActionState extends State<NewAction> {
         body: Column(
           children: [
             Expanded(
-              child: Container(
-                height: 200,
-                child: CupertinoDatePicker(
-                  mode: CupertinoDatePickerMode.dateAndTime,
-                  initialDateTime: today,
-                  onDateTimeChanged: (DateTime newDateTime) {
-                    today = newDateTime;
-                  },
-                  use24hFormat: false,
-                  minuteInterval: 1,
-                ),
-              ),
-            ),
-            Expanded(
+              flex: 4,
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
@@ -274,38 +262,55 @@ class _NewActionState extends State<NewAction> {
                     Padding(
                       padding: EdgeInsets.only(top: 30),
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 170,
-                          child: MaterialButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-
-                            onPressed: () {
-                              setState(() {
-                                // print(formattedDate);
-                                // print(widget.idCust);
-                                updateche(idUser);
-                              });
-                            },
-                            // Refer step 3
-                            child: Text(
-                              buttonText,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold),
-                            ),
-
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                height: 200,
+                color: Colors.white,
+                child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.dateAndTime,
+                  initialDateTime: today,
+                  onDateTimeChanged: (DateTime newDateTime) {
+                    today = newDateTime;
+                  },
+                  use24hFormat: false,
+                  minuteInterval: 1,
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.white,
+                margin: EdgeInsets.only(top: 15, bottom: 15),
+                height: 40,
+                width: 170,
+                child: MaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+
+                  onPressed: () {
+                    setState(() {
+                      // print(formattedDate);
+                      // print(widget.idCust);
+                      updateche(idUser);
+                    });
+                  },
+                  // Refer step 3
+                  child: Text(
+                    buttonText,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+
+                  color: Colors.blue,
                 ),
               ),
             ),

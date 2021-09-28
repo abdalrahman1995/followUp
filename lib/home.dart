@@ -20,7 +20,7 @@ class Home extends StatefulWidget {
 }
 
 Future getAllData(id) async {
-  if(allCust.length == 0) {
+  if (allCust.length == 0) {
     print('run when allCust is empty');
     var response = await http.post(
         Uri.https('followup.my', '/process/app/p.cust_table_app.php'),
@@ -40,17 +40,23 @@ Future getAllData(id) async {
     print(buildData);
     return buildData;
   }
-
 }
 
 class _HomeState extends State<Home> {
-  Widget appBarTitle = new Text(
-    "Follow Up",
-    style: TextStyle(fontWeight: FontWeight.bold),
+  Widget appBarTitle = new Center(
+    child: Container(
+      margin: EdgeInsets.only(top: 10),
+      height: 140.0,
+      width: 160.0,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('images/logoW.png'),
+        ),
+      ),
+    ),
   );
   Icon actionIcon = new Icon(Icons.search);
   late TextEditingController _searchController;
-
 
   @override
   void initState() {
@@ -69,7 +75,6 @@ class _HomeState extends State<Home> {
   }
 
   Future deleteData(String id) async {
-
     var response = await http
         .post(Uri.https('followup.my', '/process/app/p.delete.php'), body: {
       "id_cust": id,
@@ -450,7 +455,18 @@ class _HomeState extends State<Home> {
                     );
                   } else {
                     this.actionIcon = new Icon(Icons.search);
-                    this.appBarTitle = new Text("Follow Up");
+                    this.appBarTitle = new Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 10),
+                        height: 140.0,
+                        width: 160.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('images/logoW.png'),
+                          ),
+                        ),
+                      ),
+                    );
                   }
                 });
               },
@@ -464,7 +480,6 @@ class _HomeState extends State<Home> {
     setState(() {
       buildData = search(allCust, _searchController.text);
     });
-
   }
 
   List search(var json, String searchText) {
@@ -472,16 +487,15 @@ class _HomeState extends State<Home> {
     print(searchText);
     List resultList = [];
 
-    if(searchText == '') {
+    if (searchText == '') {
       return allCust;
     } else {
-
       for (var row in json) {
         print(row);
-        for(var key in row.keys) {
+        for (var key in row.keys) {
           // print(key);
           // print(row[key]);
-          if(row[key].contains(searchText))  {
+          if (row[key].contains(searchText)) {
             resultList.add(row);
           }
         }
