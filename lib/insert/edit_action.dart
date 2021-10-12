@@ -38,6 +38,7 @@ class _EditActionState extends State<EditAction> {
     // ignore: unnecessary_null_comparison
     if (widget.index != null) {
       actionType = widget.list['medium'];
+      typeUpdate = widget.list['type'];
       comment.text = widget.list['content'];
       buttonText = 'Update';
     }
@@ -77,10 +78,6 @@ class _EditActionState extends State<EditAction> {
           toastLength: Toast.LENGTH_LONG);
       return null;
     }
-    print(formattedDate);
-    print(typeUpdate);
-    print(actionType);
-    print(comment);
 
     var response = await http
         .post(Uri.https('followup.my', '/process/app/p.new_action.php'), body: {
@@ -174,11 +171,10 @@ class _EditActionState extends State<EditAction> {
                   'Closed'
                 ]
                     .map((label) => DropdownMenuItem(
-                          child: Text(
-                            label.toString(),
-                          ),
-                          value: label,
-                        ))
+                        child: Text(
+                          label.toString(),
+                        ),
+                        value: label))
                     .toList(),
                 hint: Text(
                   'Select Type',

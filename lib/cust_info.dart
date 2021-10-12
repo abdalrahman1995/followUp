@@ -490,6 +490,34 @@ class _CustInfoState extends State<CustInfo> {
                                                         Expanded(
                                                             flex: 1,
                                                             child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .only(
+                                                                left: 20,
+                                                              ),
+                                                              child: Align(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .topLeft,
+                                                                child: Text(
+                                                                  list[index]
+                                                                      ['type'],
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .fade,
+                                                                  softWrap:
+                                                                      false,
+                                                                ),
+                                                              ),
+                                                            )),
+                                                        Expanded(
+                                                            flex: 1,
+                                                            child: Container(
                                                               child: Align(
                                                                 alignment: Alignment
                                                                     .bottomRight,
