@@ -9,15 +9,15 @@ import 'dart:developer';
 
 String idUser = '';
 
-class NewClient extends StatefulWidget {
+class EditClient extends StatefulWidget {
   final Map<String, dynamic> list;
   final int index;
-  NewClient({required this.index, required this.list});
+  EditClient({required this.index, required this.list});
   @override
-  _NewClientState createState() => _NewClientState();
+  _EditClientState createState() => _EditClientState();
 }
 
-class _NewClientState extends State<NewClient> {
+class _EditClientState extends State<EditClient> {
   late TextEditingController company, name, hp, email, category;
   String buttonText = '';
 

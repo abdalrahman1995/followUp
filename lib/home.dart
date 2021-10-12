@@ -4,8 +4,8 @@ import 'package:followup/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'info.dart';
-import 'insert/new_client.dart';
+import 'cust_info.dart';
+import 'insert/edit_client.dart';
 import 'navigationbar.dart';
 
 String idUser = '';
@@ -82,9 +82,6 @@ class _HomeState extends State<Home> {
     });
 
     if (response.body == '0') {
-      setState(() {
-        getAllData(idUser);
-      });
     } else {
       print('failed to delete');
     }
@@ -241,6 +238,10 @@ class _HomeState extends State<Home> {
                                                                               [
                                                                               "id_cust"]);
 
+                                                                      getAllData(
+                                                                          idUser);
+                                                                      print(
+                                                                          idUser);
                                                                       Navigator.of(
                                                                               context)
                                                                           .pop();
@@ -262,7 +263,7 @@ class _HomeState extends State<Home> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              NewClient(
+                                                              EditClient(
                                                                 index: index,
                                                                 list:
                                                                     list[index],
@@ -347,19 +348,40 @@ class _HomeState extends State<Home> {
                                                     flex: 1,
                                                     child: Container(
                                                       padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          top: 5,
-                                                          bottom: 5),
+                                                        left: 10,
+                                                        top: 10,
+                                                      ),
                                                       child: Text(
                                                         list[index]['email'],
                                                         style: TextStyle(
                                                             color: Colors
-                                                                .blue[300],
+                                                                .grey[500],
                                                             fontWeight:
                                                                 FontWeight
-                                                                    .bold),
+                                                                    .w300),
                                                         textAlign:
                                                             TextAlign.left,
+                                                        overflow:
+                                                            TextOverflow.fade,
+                                                        softWrap: false,
+                                                      ),
+                                                    )),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          right: 10,
+                                                          bottom: 21),
+                                                      child: Text(
+                                                        list[index]['hp'],
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .grey[600],
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w300),
+                                                        textAlign:
+                                                            TextAlign.right,
                                                         overflow:
                                                             TextOverflow.fade,
                                                         softWrap: false,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:followup/add_cust.dart';
+import 'package:followup/login1.dart';
 // import 'package:followup/info.dart';
 import 'Action.dart';
 import 'home.dart';
 // import 'insert/new_client.dart';
-import 'login.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: LogIn(),
+        home: Loginscreen(),
         routes: {
           "log_in": (context) {
-            return LogIn();
+            return Loginscreen();
           },
           "home": (context) {
             return Home();

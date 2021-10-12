@@ -6,8 +6,10 @@ import '../drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../navigationbar.dart';
 import 'dart:developer';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 String idUser = '';
+List BackendService = ['asa,sdfds,sdfsd,sdfdsf,sdfs'];
 
 class AddCust extends StatefulWidget {
   AddCust({Key? key}) : super(key: key);
@@ -43,12 +45,12 @@ class _AddCustState extends State<AddCust> {
   }
 
   void updateche(id, String button) async {
-    if (company.text == '') {
-      Fluttertoast.showToast(
-          msg: "Please ensure all required fields are completed.",
-          toastLength: Toast.LENGTH_LONG);
-      return null;
-    }
+    // if (company.text == '') {
+    //   Fluttertoast.showToast(
+    //       msg: "Please ensure all required fields are completed.",
+    //       toastLength: Toast.LENGTH_LONG);
+    //   return null;
+    // }
 
     if (name.text == '') {
       Fluttertoast.showToast(
@@ -154,7 +156,46 @@ class _AddCustState extends State<AddCust> {
               textbuild('Email'),
               bulidTextField('exampel@gmail.com', email, TextInputType.text),
               textbuild('Category'),
-              bulidTextField('Category', category, TextInputType.text),
+              // bulidTextField('Category', category, TextInputType.text),
+              Container(
+                height: 50,
+                margin: EdgeInsets.only(left: 30, right: 30, top: 5),
+                child: TypeAheadField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                      // autofocus: true,
+                      controller: category,
+                      decoration: new InputDecoration(
+                        hintText: 'Category',
+                        hintStyle: TextStyle(
+                            color: Colors.blueAccent[100], fontSize: 14),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide:
+                              BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide:
+                              BorderSide(color: Colors.grey, width: 1.0),
+                        ),
+                      )),
+                  suggestionsCallback: (pattern) async {
+                    return BackendService;
+                  },
+                  itemBuilder: (context, suggestion) {
+                    return ListTile(
+                      // leading: Icon(Icons.shopping_cart),
+                      title: Text(''),
+                      subtitle: Text(''),
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    // Navigator.of(context).push(
+                    //     MaterialPageRoute(builder: (context) => Loginscreen()));
+                  },
+                ),
+              ),
+
               Padding(
                 padding: EdgeInsets.only(top: 30),
               ),

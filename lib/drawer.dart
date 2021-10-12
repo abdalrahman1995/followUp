@@ -16,6 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     setState(() {
       sharedPreferences.remove('id_user');
+
       Navigator.of(context).pushNamed('log_in');
     });
   }
@@ -76,21 +77,21 @@ class _MyDrawerState extends State<MyDrawer> {
               Divider(
                 height: 1,
               ),
-              ListTile(
-                title: Text(
-                  'Profile',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                onTap: () {
-                  Navigator.of(context).pushNamed('home');
-                },
-              ),
-              Divider(
-                height: 1,
-              ),
+              // ListTile(
+              //   title: Text(
+              //     'Profile',
+              //     style: TextStyle(
+              //         color: Colors.blue,
+              //         fontSize: 18,
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              //   onTap: () {
+              //     Navigator.of(context).pushNamed('home');
+              //   },
+              // ),
+              // Divider(
+              //   height: 1,
+              // ),
               ListTile(
                 title: Text(
                   'Logout',
@@ -101,8 +102,8 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
                 onTap: () {
                   logOut();
-                  // Navigator.pushNamedAndRemoveUntil(
-                  //     context, "log_in", (r) => false);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, "log_in", (r) => false);
                 },
               ),
             ])));

@@ -17,6 +17,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      color: Colors.grey[100],
+      elevation: 10,
       child: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

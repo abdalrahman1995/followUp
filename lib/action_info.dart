@@ -17,239 +17,215 @@ class _ActionInfoState extends State<ActionInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbarbuilder(widget.list['cust_name'] + "  " + "Details "),
+      appBar: appbarbuilder(widget.list['name']),
       drawer: MyDrawer(),
       bottomNavigationBar: MyNavigationBar('action'),
       body: Column(
         children: [
           Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Colors.white,
-                                Color(0xFFE1F5FE),
-                              ])),
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Name :',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))),
-                          Expanded(
-                              flex: 2,
-                              child: Container(
-                                  child: Text(widget.list['cust_name']))),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Colors.white,
-                                Color(0xFFE1F5FE),
-                              ])),
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Date Start :',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))),
-                          Expanded(
-                              flex: 2,
-                              child: Container(
-                                  child: Text(widget.list['updated']
-                                      .substring(0, 10)))),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: 40,
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Colors.white,
-                                Color(0xFFE1F5FE),
-                              ])),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Type :',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))),
-                          Expanded(
-                              flex: 2,
-                              child:
-                                  Container(child: Text(widget.list['type']))),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: 40,
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Colors.white,
-                                Color(0xFFE1F5FE),
-                              ])),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Contact :',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))),
-                          Expanded(
-                              flex: 2,
-                              child: Container(child: Text(widget.list['hp']))),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      height: 40,
-                      margin: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Colors.white,
-                                Color(0xFFE1F5FE),
-                              ])),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  child: Text(
-                                    'Action :',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))),
-                          Expanded(
-                              flex: 2,
-                              child: Container(
-                                  child: Text(widget.list['medium']))),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: EdgeInsets.all(5),
-                      padding: EdgeInsets.only(top: 20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomLeft,
-                              end: Alignment.topLeft,
-                              colors: [
-                                Colors.white,
-                                Color(0xFFE1F5FE),
-                              ])),
-                      height: 100,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                                margin: EdgeInsets.only(left: 20),
-                                child: Text(
-                                  'Content :',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )),
+              child: ListView(
+            children: [
+              Container(
+                margin: EdgeInsets.all(5),
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Name :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                    Expanded(
+                        flex: 2,
+                        child: Container(child: Text(widget.list['name']))),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Divider(
+                  height: 1,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                height: 40,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Last Update :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                    Expanded(
+                        flex: 2,
+                        child: Container(
+                            child:
+                                Text(widget.list['updated'].substring(0, 10)))),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Divider(
+                  height: 1,
+                ),
+              ),
+              Container(
+                height: 40,
+                margin: EdgeInsets.all(5),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Type :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                    Expanded(
+                        flex: 2,
+                        child: Container(child: Text(widget.list['type']))),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Divider(
+                  height: 1,
+                ),
+              ),
+              Container(
+                height: 40,
+                margin: EdgeInsets.all(5),
+                // decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     gradient: LinearGradient(
+                //         begin: Alignment.bottomLeft,
+                //         end: Alignment.topLeft,
+                //         colors: [
+                //           Colors.white,
+                //           Color(0xFFE1F5FE),
+                //         ])),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Contact :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                    Expanded(
+                        flex: 2,
+                        child: Container(child: Text(widget.list['phone']))),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Divider(
+                  height: 1,
+                ),
+              ),
+              Container(
+                height: 40,
+                margin: EdgeInsets.all(5),
+                // decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     gradient: LinearGradient(
+                //         begin: Alignment.bottomLeft,
+                //         end: Alignment.topLeft,
+                //         colors: [
+                //           Colors.white,
+                //           Color(0xFFE1F5FE),
+                //         ])),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: Container(
+                            margin: EdgeInsets.only(left: 20),
+                            child: Text(
+                              'Action :',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ))),
+                    Expanded(
+                        flex: 2,
+                        child: Container(child: Text(widget.list['medium']))),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Divider(
+                  height: 1,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.only(top: 20),
+                // decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(10),
+                //     gradient: LinearGradient(
+                //         begin: Alignment.bottomLeft,
+                //         end: Alignment.topLeft,
+                //         colors: [
+                //           Colors.white,
+                //           Color(0xFFE1F5FE),
+                //         ])),
+                height: 245,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Expanded(
+                        child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                          margin: EdgeInsets.only(left: 20),
+                          child: Text(
+                            'Content :',
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           )),
-                          Expanded(
-                              flex: 2,
-                              child: SizedBox(
-                                  height: 225.0,
-                                  child: ListView(
-                                    children: [
-                                      Container(
-                                          child: Text(widget.list['content'])),
-                                    ],
-                                  ))),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )),
+                    )),
+                    Expanded(
+                        flex: 2,
+                        child: SizedBox(
+                            height: 225.0,
+                            child: ListView(
+                              children: [
+                                Container(child: Text(widget.list['content'])),
+                              ],
+                            ))),
+                  ],
+                ),
+              ),
+            ],
+          )),
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(15.0),
-      //   ),
-      //   backgroundColor: Colors.blue[300],
-      //   onPressed: () {
-      //     Navigator.of(context).pushNamed('new_action');
-      //   },
-      //   child: Icon(
-      //     Icons.add,
-      //     size: 35,
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        backgroundColor: Colors.blue[300],
+        onPressed: () {
+          Navigator.of(context).pushNamed('new_action');
+        },
+        child: Icon(
+          Icons.add,
+          size: 35,
+        ),
+      ),
     );
   }
 

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:followup/drawer.dart';
-import 'package:followup/insert/new_action.dart';
+// import 'package:followup/insert/edit_action.dart'';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'action_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'cust_info.dart';
+import 'insert/Edit_action.dart';
 import 'navigationbar.dart';
 
 String idUser = '';
@@ -40,9 +41,17 @@ Future getAllData(id) async {
 }
 
 class _ActionListState extends State<ActionList> {
-  Widget appBarTitle = new Text(
-    "Follow Up",
-    style: TextStyle(fontWeight: FontWeight.bold),
+  Widget appBarTitle = new Center(
+    child: Container(
+      margin: EdgeInsets.only(top: 10),
+      height: 140.0,
+      width: 160.0,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('images/logoW.png'),
+        ),
+      ),
+    ),
   );
   Icon actionIcon = new Icon(Icons.search);
   late TextEditingController _searchController;
@@ -167,7 +176,7 @@ class _ActionListState extends State<ActionList> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              NewAction(
+                                                              EditAction(
                                                                 index: index,
                                                                 list:
                                                                     list[index],
@@ -200,7 +209,7 @@ class _ActionListState extends State<ActionList> {
                                                       padding: EdgeInsets.only(
                                                           left: 10, top: 10),
                                                       child: Text(
-                                                        list[index]['type'],
+                                                        list[index]['name'],
                                                         style: TextStyle(
                                                             color: Colors.black,
                                                             fontSize: 16,
@@ -220,8 +229,7 @@ class _ActionListState extends State<ActionList> {
                                                       padding: EdgeInsets.only(
                                                           right: 30, top: 10),
                                                       child: Text(
-                                                        list[index]
-                                                            ['cust_name'],
+                                                        list[index]['medium'],
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight:
@@ -252,7 +260,8 @@ class _ActionListState extends State<ActionList> {
                                                             .substring(0, 10),
                                                         style: TextStyle(
                                                             color: Colors
-                                                                .blue[300],
+                                                                .grey[500],
+                                                            fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
@@ -263,27 +272,27 @@ class _ActionListState extends State<ActionList> {
                                                         softWrap: false,
                                                       ),
                                                     )),
-                                                Expanded(
-                                                    flex: 1,
-                                                    child: Container(
-                                                      padding: EdgeInsets.only(
-                                                          right: 20,
-                                                          top: 5,
-                                                          bottom: 5),
-                                                      child: Text(
-                                                        list[index]['medium'],
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                        textAlign:
-                                                            TextAlign.right,
-                                                        overflow:
-                                                            TextOverflow.fade,
-                                                        softWrap: false,
-                                                      ),
-                                                    )),
+                                                // Expanded(
+                                                //     flex: 1,
+                                                //     child: Container(
+                                                //       padding: EdgeInsets.only(
+                                                //           right: 20,
+                                                //           top: 5,
+                                                //           bottom: 5),
+                                                //       child: Text(
+                                                //         list[index]['medium'],
+                                                //         style: TextStyle(
+                                                //             color: Colors.grey,
+                                                //             fontWeight:
+                                                //                 FontWeight
+                                                //                     .bold),
+                                                //         textAlign:
+                                                //             TextAlign.right,
+                                                //         overflow:
+                                                //             TextOverflow.fade,
+                                                //         softWrap: false,
+                                                //       ),
+                                                //     )),
                                               ],
                                             ),
                                           ),
@@ -294,7 +303,7 @@ class _ActionListState extends State<ActionList> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ActionInfo(
+                                          builder: (context) => CustInfo(
                                                 index: index,
                                                 list: list[index],
                                               )));
@@ -361,7 +370,18 @@ class _ActionListState extends State<ActionList> {
                     );
                   } else {
                     this.actionIcon = new Icon(Icons.search);
-                    this.appBarTitle = new Text("Follow Up");
+                    this.appBarTitle = new Center(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 10),
+                        height: 140.0,
+                        width: 160.0,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('images/logoW.png'),
+                          ),
+                        ),
+                      ),
+                    );
                   }
                 });
               },

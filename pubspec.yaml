@@ -41,6 +41,8 @@ dependencies:
   connectivity: ^3.0.6
   intl: ^0.17.0
   animations: ^2.0.1
+  animated_button:
+  flutter_typeahead:
 
 dev_dependencies:
   flutter_test:

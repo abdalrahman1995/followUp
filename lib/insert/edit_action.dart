@@ -12,20 +12,22 @@ import 'dart:convert';
 var typeUpdate;
 var actionType;
 String idUser = '';
+String buttonText = '';
 
-class AddAction extends StatefulWidget {
+class EditAction extends StatefulWidget {
   final Map<String, dynamic> list;
+  final int index;
   final String idCust;
-  AddAction({required this.idCust, required this.list});
+  EditAction({required this.idCust, required this.index, required this.list});
   @override
-  _AddActionState createState() => _AddActionState();
+  _EditActionState createState() => _EditActionState();
 }
 
 String formattedDate = DateFormat('yyyy-MM-dd H:m:s').format(today);
 
 DateTime today = DateTime.now();
 
-class _AddActionState extends State<AddAction> {
+class _EditActionState extends State<EditAction> {
   late TextEditingController comment;
 
   @override
@@ -33,7 +35,12 @@ class _AddActionState extends State<AddAction> {
     getValidtionData();
     idUser = '1';
     comment = new TextEditingController();
-
+    // ignore: unnecessary_null_comparison
+    if (widget.index != null) {
+      actionType = widget.list['medium'];
+      comment.text = widget.list['content'];
+      buttonText = 'Update';
+    }
     super.initState();
   }
 
@@ -70,24 +77,28 @@ class _AddActionState extends State<AddAction> {
           toastLength: Toast.LENGTH_LONG);
       return null;
     }
+    print(formattedDate);
+    print(typeUpdate);
+    print(actionType);
+    print(comment);
 
     var response = await http
         .post(Uri.https('followup.my', '/process/app/p.new_action.php'), body: {
       "id_cust": widget.idCust,
       "id_user": id,
-      "id_action": "",
+      "id_action": widget.list['id_action'],
       "type": typeUpdate,
       "medium": actionType,
       "content": comment.text,
       "follow": formattedDate,
-      "button": "Create",
+      "button": "Update",
     });
-    print(response);
+    print(response.body);
 
     if (json.decode(response.body) == 0) {
       Fluttertoast.showToast(
-          msg: "Data successfully created.", toastLength: Toast.LENGTH_SHORT);
-      Navigator.of(context).pop();
+          msg: "Data successfully upladed.", toastLength: Toast.LENGTH_SHORT);
+      Navigator.of(context).pushNamed("action");
     } else {
       Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);
     }
@@ -95,6 +106,7 @@ class _AddActionState extends State<AddAction> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60.0), // here the desired height
             child: AppBar(
@@ -102,7 +114,7 @@ class _AddActionState extends State<AddAction> {
               centerTitle: true,
               title: Center(
                   child: Text(
-                'Add Action',
+                'Edit Action',
                 style: TextStyle(fontWeight: FontWeight.bold),
               )),
               actions: [
@@ -233,6 +245,7 @@ class _AddActionState extends State<AddAction> {
             ),
             Container(
               height: 200,
+              color: Colors.white,
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.dateAndTime,
                 initialDateTime: today,
@@ -244,7 +257,6 @@ class _AddActionState extends State<AddAction> {
               ),
             ),
             Container(
-              // color: Colors.white,
               color: Colors.white,
               margin: EdgeInsets.only(top: 15, bottom: 15, left: 80, right: 60),
               height: 40,
@@ -253,14 +265,17 @@ class _AddActionState extends State<AddAction> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
+
                 onPressed: () {
                   setState(() {
+                    print(formattedDate);
+                    print(widget.idCust);
                     updateche(idUser);
                   });
                 },
                 // Refer step 3
                 child: Text(
-                  'Create New Action',
+                  "Update",
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -291,13 +306,12 @@ class _AddActionState extends State<AddAction> {
     return Container(
       // height: 55,
       margin: EdgeInsets.only(left: 30, right: 30, top: 5),
-      // padding: EdgeInsets.all(0),
       child: TextField(
-        controller: mycontroller,
         minLines: 1,
-        maxLines: 5,
+        maxLines: 50,
         // ignore: deprecated_member_use
         maxLengthEnforced: true,
+        controller: mycontroller,
         decoration: new InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),

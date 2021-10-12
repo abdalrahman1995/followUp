@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:followup/drawer.dart';
-import 'package:followup/insert/new_action.dart';
+import 'package:followup/insert/edit_action.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'action_info.dart';
@@ -65,6 +66,7 @@ class _CustInfoState extends State<CustInfo> {
     return Scaffold(
         appBar: appbarbuilder(widget.list['name']),
         drawer: MyDrawer(),
+        backgroundColor: Colors.white,
         bottomNavigationBar: MyNavigationBar('home'),
         body: Column(
           children: [
@@ -73,7 +75,7 @@ class _CustInfoState extends State<CustInfo> {
                 child: Column(
                   children: [
                     Container(
-                      height: 40,
+                      height: 42,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -88,23 +90,35 @@ class _CustInfoState extends State<CustInfo> {
                       ),
                     ),
                     Container(
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                              child: Container(
-                                  margin: EdgeInsets.only(left: 20),
-                                  child: Text('Date Start:'))),
-                          Expanded(
-                              child: Container(
-                                  child: Text(widget.list['updated']
-                                      .substring(0, 10)))),
-                        ],
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Divider(
+                        height: 1,
                       ),
                     ),
+                    // Container(
+                    //   height: 42,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //     children: [
+                    //       Expanded(
+                    //           child: Container(
+                    //               margin: EdgeInsets.only(left: 20),
+                    //               child: Text('Last Update:'))),
+                    //       Expanded(
+                    //           child: Container(
+                    //               child: Text(widget.list['updated']
+                    //                   .substring(0, 10)))),
+                    //     ],
+                    //   ),
+                    // ),
+                    // Container(
+                    //   padding: EdgeInsets.only(left: 10, right: 10),
+                    //   child: Divider(
+                    //     height: 1,
+                    //   ),
+                    // ),
                     Container(
-                      height: 40,
+                      height: 42,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -119,7 +133,13 @@ class _CustInfoState extends State<CustInfo> {
                       ),
                     ),
                     Container(
-                      height: 40,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    Container(
+                      height: 42,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -133,7 +153,13 @@ class _CustInfoState extends State<CustInfo> {
                       ),
                     ),
                     Container(
-                      height: 40,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    Container(
+                      height: 42,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -148,7 +174,13 @@ class _CustInfoState extends State<CustInfo> {
                       ),
                     ),
                     Container(
-                      height: 40,
+                      padding: EdgeInsets.only(left: 10, right: 10),
+                      child: Divider(
+                        height: 1,
+                      ),
+                    ),
+                    Container(
+                      height: 42,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -164,58 +196,64 @@ class _CustInfoState extends State<CustInfo> {
                     ),
                   ],
                 )),
+            Container(
+              color: Color(0xFFe8e5dc),
+              height: 10,
+              // margin: EdgeInsets.only(left: 60, right: 60),
+            ),
             Expanded(
                 flex: 4,
                 child: Column(
                   children: [
+                    // Expanded(
+                    //   flex: 1,
+                    //   child: Container(
+                    //       margin: EdgeInsets.only(top: 10, left: 5, right: 5),
+                    //       height: 50,
+                    //       decoration: BoxDecoration(
+                    //           borderRadius: BorderRadius.circular(10),
+                    //           // color: Colors.white,
+                    //           gradient: LinearGradient(
+                    //               begin: Alignment.bottomLeft,
+                    //               end: Alignment.topLeft,
+                    //               colors: [
+                    //                 Colors.white70,
+                    //                 Colors.white,
+                    //               ]),
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //               blurRadius: 1,
+                    //               color: Colors.blue,
+                    //               spreadRadius: 1,
+                    //               offset: Offset(0, 0), // Shadow position
+                    //             ),
+                    //           ]),
+                    //       child: Row(
+                    //         children: [
+                    //           Expanded(
+                    //               flex: 1,
+                    //               child: Text(
+                    //                 'Client Name',
+                    //                 textAlign: TextAlign.center,
+                    //               )),
+                    //           Expanded(
+                    //               flex: 1,
+                    //               child: Text(
+                    //                 'Action',
+                    //                 textAlign: TextAlign.center,
+                    //               )),
+                    //           Expanded(
+                    //               flex: 1,
+                    //               child: Text(
+                    //                 'Date',
+                    //                 textAlign: TextAlign.center,
+                    //               )),
+                    //         ],
+                    //       )),
+                    // ),
+
                     Expanded(
-                      flex: 1,
-                      child: Container(
-                          margin: EdgeInsets.only(top: 10, left: 5, right: 5),
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              // color: Colors.white,
-                              gradient: LinearGradient(
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topLeft,
-                                  colors: [
-                                    Colors.white70,
-                                    Colors.white,
-                                  ]),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 1,
-                                  color: Colors.blue,
-                                  spreadRadius: 1,
-                                  offset: Offset(0, 0), // Shadow position
-                                ),
-                              ]),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Client Name',
-                                    textAlign: TextAlign.center,
-                                  )),
-                              Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Action',
-                                    textAlign: TextAlign.center,
-                                  )),
-                              Expanded(
-                                  flex: 1,
-                                  child: Text(
-                                    'Date',
-                                    textAlign: TextAlign.center,
-                                  )),
-                            ],
-                          )),
-                    ),
-                    Expanded(
-                      flex: 5,
+                      flex: 4,
                       child: Container(
                         child: FutureBuilder(
                           future: getAllData(widget.list['id_cust']),
@@ -224,7 +262,8 @@ class _CustInfoState extends State<CustInfo> {
                             if (snapshot.hasError) print(snapshot.error);
                             return snapshot.hasData
                                 ? ListView.builder(
-                                    padding: EdgeInsets.only(bottom: 60),
+                                    padding:
+                                        EdgeInsets.only(bottom: 70, top: 0),
                                     itemCount: snapshot.data?.length,
                                     itemBuilder: (context, index) {
                                       List list = snapshot.data;
@@ -234,7 +273,8 @@ class _CustInfoState extends State<CustInfo> {
                                               SlidableDrawerActionPane(),
                                           secondaryActions: <Widget>[
                                             Container(
-                                              margin: EdgeInsets.only(top: 8),
+                                              margin: EdgeInsets.only(
+                                                  top: 5, bottom: 7),
                                               padding: EdgeInsets.all(2),
                                               child: Row(
                                                 children: [
@@ -318,7 +358,7 @@ class _CustInfoState extends State<CustInfo> {
                                                               MaterialPageRoute(
                                                                   builder:
                                                                       (context) =>
-                                                                          NewAction(
+                                                                          EditAction(
                                                                             index:
                                                                                 index,
                                                                             list:
@@ -334,67 +374,153 @@ class _CustInfoState extends State<CustInfo> {
                                           ],
                                           child: Container(
                                               margin: EdgeInsets.only(
-                                                  top: 10, left: 15, right: 15),
-                                              height: 44,
+                                                  left: 15, right: 15, top: 10),
+                                              height: 75,
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  color: Colors.white,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      blurRadius: 1,
-                                                      color: Colors.black12,
-                                                      spreadRadius: 1,
-                                                      offset: Offset(0,
-                                                          0), // Shadow position
-                                                    ),
-                                                  ]),
+                                                border: Border(
+                                                    bottom: BorderSide(
+                                                  color: Colors.black12,
+                                                )),
+                                              ),
                                               child: Row(
                                                 children: [
                                                   Expanded(
-                                                      flex: 1,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.all(5),
-                                                        child: Text(
-                                                          list[index]
-                                                              ['cust_name'],
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          overflow:
-                                                              TextOverflow.fade,
-                                                          softWrap: false,
-                                                        ),
-                                                      )),
+                                                    flex: 2,
+                                                    child: Column(
+                                                      children: [
+                                                        Expanded(
+                                                            flex: 1,
+                                                            child: Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      left: 10,
+                                                                      top: 0,
+                                                                      bottom:
+                                                                          10),
+                                                              child: SizedBox(
+                                                                child: ListView(
+                                                                  children: [
+                                                                    Container(
+                                                                      child:
+                                                                          Text(
+                                                                        list[index]
+                                                                            [
+                                                                            'content'],
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              11,
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.left,
+                                                                        overflow:
+                                                                            TextOverflow.fade,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  ),
                                                   Expanded(
-                                                      flex: 1,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.all(5),
-                                                        child: Text(
-                                                          list[index]['medium'],
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          overflow:
-                                                              TextOverflow.fade,
-                                                          softWrap: false,
-                                                        ),
-                                                      )),
-                                                  Expanded(
-                                                      flex: 1,
-                                                      child: Container(
-                                                        padding:
-                                                            EdgeInsets.all(5),
-                                                        child: Text(
-                                                          list[index]['updated']
-                                                              .substring(0, 10),
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          overflow:
-                                                              TextOverflow.fade,
-                                                          softWrap: false,
-                                                        ),
-                                                      )),
+                                                    flex: 1,
+                                                    child: Column(
+                                                      children: [
+                                                        Expanded(
+                                                            flex: 1,
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .only(
+                                                                left: 20,
+                                                              ),
+                                                              child: Align(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .topLeft,
+                                                                child: Text(
+                                                                  list[index][
+                                                                      'medium'],
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .fade,
+                                                                  softWrap:
+                                                                      false,
+                                                                ),
+                                                              ),
+                                                            )),
+                                                        Expanded(
+                                                            flex: 1,
+                                                            child: Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .only(
+                                                                left: 20,
+                                                              ),
+                                                              child: Align(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .topLeft,
+                                                                child: Text(
+                                                                  list[index][
+                                                                          'updated']
+                                                                      .substring(
+                                                                          0,
+                                                                          10),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                  ),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .fade,
+                                                                  softWrap:
+                                                                      false,
+                                                                ),
+                                                              ),
+                                                            )),
+                                                        Expanded(
+                                                            flex: 1,
+                                                            child: Container(
+                                                              child: Align(
+                                                                alignment: Alignment
+                                                                    .bottomRight,
+                                                                child: Text(
+                                                                  list[index][
+                                                                          'follow']
+                                                                      .substring(
+                                                                          5,
+                                                                          10),
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    color: Colors
+                                                                            .grey[
+                                                                        500],
+                                                                  ),
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .left,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .fade,
+                                                                  softWrap:
+                                                                      false,
+                                                                ),
+                                                              ),
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  ),
                                                 ],
                                               )),
                                         ),
@@ -411,14 +537,35 @@ class _CustInfoState extends State<CustInfo> {
                                       );
                                     })
                                 : Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text(
-                                      'No Action Added',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.bold),
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Container(
+                                            child: Image(
+                                              image: AssetImage(
+                                                'images/data.png',
+                                              ),
+                                              width: 230,
+                                              height: 210,
+                                            ),
+                                          ),
+                                          Container(
+                                            child: Text(
+                                              'No data added',
+                                              // AppLocalizations.of(context).noData,
+
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   );
                           },
@@ -462,6 +609,8 @@ class _CustInfoState extends State<CustInfo> {
                 setState(() {
                   getAllData(widget.list['id_cust']);
                 });
+                Fluttertoast.showToast(
+                    msg: "Refreshed", toastLength: Toast.LENGTH_LONG);
               },
               heroTag: null,
             ),
