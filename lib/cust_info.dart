@@ -95,28 +95,6 @@ class _CustInfoState extends State<CustInfo> {
                         height: 1,
                       ),
                     ),
-                    // Container(
-                    //   height: 42,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    //     children: [
-                    //       Expanded(
-                    //           child: Container(
-                    //               margin: EdgeInsets.only(left: 20),
-                    //               child: Text('Last Update:'))),
-                    //       Expanded(
-                    //           child: Container(
-                    //               child: Text(widget.list['updated']
-                    //                   .substring(0, 10)))),
-                    //     ],
-                    //   ),
-                    // ),
-                    // Container(
-                    //   padding: EdgeInsets.only(left: 10, right: 10),
-                    //   child: Divider(
-                    //     height: 1,
-                    //   ),
-                    // ),
                     Container(
                       height: 42,
                       child: Row(
@@ -199,59 +177,11 @@ class _CustInfoState extends State<CustInfo> {
             Container(
               color: Color(0xFFe8e5dc),
               height: 10,
-              // margin: EdgeInsets.only(left: 60, right: 60),
             ),
             Expanded(
                 flex: 4,
                 child: Column(
                   children: [
-                    // Expanded(
-                    //   flex: 1,
-                    //   child: Container(
-                    //       margin: EdgeInsets.only(top: 10, left: 5, right: 5),
-                    //       height: 50,
-                    //       decoration: BoxDecoration(
-                    //           borderRadius: BorderRadius.circular(10),
-                    //           // color: Colors.white,
-                    //           gradient: LinearGradient(
-                    //               begin: Alignment.bottomLeft,
-                    //               end: Alignment.topLeft,
-                    //               colors: [
-                    //                 Colors.white70,
-                    //                 Colors.white,
-                    //               ]),
-                    //           boxShadow: [
-                    //             BoxShadow(
-                    //               blurRadius: 1,
-                    //               color: Colors.blue,
-                    //               spreadRadius: 1,
-                    //               offset: Offset(0, 0), // Shadow position
-                    //             ),
-                    //           ]),
-                    //       child: Row(
-                    //         children: [
-                    //           Expanded(
-                    //               flex: 1,
-                    //               child: Text(
-                    //                 'Client Name',
-                    //                 textAlign: TextAlign.center,
-                    //               )),
-                    //           Expanded(
-                    //               flex: 1,
-                    //               child: Text(
-                    //                 'Action',
-                    //                 textAlign: TextAlign.center,
-                    //               )),
-                    //           Expanded(
-                    //               flex: 1,
-                    //               child: Text(
-                    //                 'Date',
-                    //                 textAlign: TextAlign.center,
-                    //               )),
-                    //         ],
-                    //       )),
-                    // ),
-
                     Expanded(
                       flex: 4,
                       child: Container(
@@ -490,34 +420,6 @@ class _CustInfoState extends State<CustInfo> {
                                                         Expanded(
                                                             flex: 1,
                                                             child: Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .only(
-                                                                left: 20,
-                                                              ),
-                                                              child: Align(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .topLeft,
-                                                                child: Text(
-                                                                  list[index]
-                                                                      ['type'],
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        14,
-                                                                  ),
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .fade,
-                                                                  softWrap:
-                                                                      false,
-                                                                ),
-                                                              ),
-                                                            )),
-                                                        Expanded(
-                                                            flex: 1,
-                                                            child: Container(
                                                               child: Align(
                                                                 alignment: Alignment
                                                                     .bottomRight,
@@ -530,7 +432,7 @@ class _CustInfoState extends State<CustInfo> {
                                                                   style:
                                                                       TextStyle(
                                                                     fontSize:
-                                                                        10,
+                                                                        12,
                                                                     color: Colors
                                                                             .grey[
                                                                         500],
@@ -583,8 +485,6 @@ class _CustInfoState extends State<CustInfo> {
                                           Container(
                                             child: Text(
                                               'No data added',
-                                              // AppLocalizations.of(context).noData,
-
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -604,26 +504,6 @@ class _CustInfoState extends State<CustInfo> {
                 ))
           ],
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(15.0),
-        //   ),
-        //   backgroundColor: Colors.blue[300],
-        //   onPressed: () {
-        //     Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => NewAction(
-        //               idCust: widget.list['id_cust'],
-        //               index: index,
-        //               list: list[index]),
-        //         ));
-        //   },
-        //   child: Icon(
-        //     Icons.add,
-        //     size: 35,
-        //   ),
-        // ),
         floatingActionButton: Container(
           margin: EdgeInsets.only(left: 30),
           child:
@@ -673,10 +553,17 @@ class _CustInfoState extends State<CustInfo> {
           elevation: 0,
           centerTitle: true,
           title: Center(
-              child: Text(
-            name,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )),
+            child: Container(
+              margin: EdgeInsets.only(top: 10),
+              height: 140.0,
+              width: 160.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/logoW.png'),
+                ),
+              ),
+            ),
+          ),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(

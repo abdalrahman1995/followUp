@@ -33,6 +33,10 @@ class _AddActionState extends State<AddAction> {
     getValidtionData();
     idUser = '1';
     comment = new TextEditingController();
+    setState(() {
+      typeUpdate = null;
+      actionType = null;
+    });
 
     super.initState();
   }
@@ -76,8 +80,8 @@ class _AddActionState extends State<AddAction> {
       "id_cust": widget.idCust,
       "id_user": id,
       "id_action": "",
-      "type": typeUpdate.toLowerCase(),
-      "medium": actionType.toLowerCase(),
+      "type": typeUpdate,
+      "medium": actionType,
       "content": comment.text,
       "follow": formattedDate,
       "button": "Create",
@@ -152,6 +156,7 @@ class _AddActionState extends State<AddAction> {
                 iconSize: 25,
                 isExpanded: true,
                 value: typeUpdate,
+                isDense: true,
                 items: [
                   "I called ",
                   "I sent email",
@@ -159,7 +164,7 @@ class _AddActionState extends State<AddAction> {
                   'I did video call',
                   'I met the person',
                   'just an update ',
-                  'Closed'
+                  'Successfully closed'
                 ]
                     .map((label) => DropdownMenuItem(
                           child: Text(
@@ -243,33 +248,60 @@ class _AddActionState extends State<AddAction> {
                 minuteInterval: 1,
               ),
             ),
-            Container(
-              // color: Colors.white,
-              color: Colors.white,
-              margin: EdgeInsets.only(top: 15, bottom: 15, left: 80, right: 60),
-              height: 40,
-              width: 170,
-              child: MaterialButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                onPressed: () {
-                  setState(() {
-                    updateche(idUser);
-                  });
-                },
-                // Refer step 3
-                child: Text(
-                  'Create New Action',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
+            Column(
+              children: [
+                Container(
+                  height: 40,
+                  width: 170,
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
 
-                color: Colors.blue,
-              ),
+                    onPressed: () {
+                      updateche(idUser);
+                    },
+                    // Refer step 3
+                    child: Text(
+                      'Create New Action',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    ),
+
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
             ),
+            // Container(
+            //   // color: Colors.white,
+            //   color: Colors.white,
+            //   margin: EdgeInsets.only(top: 15, bottom: 15, left: 80, right: 60),
+            //   height: 40,
+            //   width: 170,
+            //   child: MaterialButton(
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(10.0),
+            //     ),
+            //     onPressed: () {
+            //       setState(() {
+            //         updateche(idUser);
+            //       });
+            //     },
+            //     // Refer step 3
+            //     child: Text(
+            //       'Create New Action',
+            //       style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 14,
+            //           fontWeight: FontWeight.bold),
+            //     ),
+
+            //     color: Colors.blue,
+            //   ),
+            // ),
           ],
         ));
   }

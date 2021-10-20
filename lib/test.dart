@@ -9,77 +9,23 @@ import '../navigationbar.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-String typeUpdate = '';
-String actionType = '';
+var typeUpdate;
+var actionType;
 String idUser = '';
-List<Map<String, String>> acType = [
-  {
-    "name": "I called",
-    "id": "call",
-  },
-  {
-    "name": "I sent email",
-    "id": "email",
-  },
-  {
-    "name": "I sent Whatsapp",
-    "id": "whatsapp",
-  },
-  {
-    "name": "I did video call",
-    "id": "video",
-  },
-  {
-    "name": "just an update",
-    "id": "update",
-  },
-  {
-    "name": "Successfully Closed",
-    "id": "close",
-  },
-];
-List<Map<String, String>> upType = [
-  {
-    "name": "Individual",
-    "id": "0",
-  },
-  {
-    "name": "Individual",
-    "id": "0",
-  },
-  {
-    "name": "Individual",
-    "id": "0",
-  },
-  {
-    "name": "Individual",
-    "id": "0",
-  },
-  {
-    "name": "Individual",
-    "id": "0",
-  },
-  {
-    "name": "Team",
-    "id": "1",
-  },
-];
 
-class EditAction extends StatefulWidget {
+class JustAction extends StatefulWidget {
   final Map<String, dynamic> list;
-  final int index;
   final String idCust;
-  EditAction({required this.idCust, required this.index, required this.list});
-
+  JustAction({required this.idCust, required this.list});
   @override
-  _EditActionState createState() => _EditActionState();
+  _JustActionState createState() => _JustActionState();
 }
 
 String formattedDate = DateFormat('yyyy-MM-dd H:m:s').format(today);
 
 DateTime today = DateTime.now();
 
-class _EditActionState extends State<EditAction> {
+class _JustActionState extends State<JustAction> {
   late TextEditingController comment;
 
   @override
@@ -87,14 +33,6 @@ class _EditActionState extends State<EditAction> {
     getValidtionData();
     idUser = '1';
     comment = new TextEditingController();
-    // ignore: unnecessary_null_comparison
-    // if (widget.index != null) {
-    //
-    // typeUpdate = widget.list['type'];
-    // actionType = widget.list['medium'];
-
-    comment.text = widget.list['content'];
-    // }
 
     super.initState();
   }
@@ -137,21 +75,19 @@ class _EditActionState extends State<EditAction> {
         .post(Uri.https('followup.my', '/process/app/p.new_action.php'), body: {
       "id_cust": widget.idCust,
       "id_user": id,
-      "id_action": widget.list['id_action'],
-      "type": typeUpdate,
-      "medium": actionType,
+      "id_action": "",
+      "type": typeUpdate.toLowerCase(),
+      "medium": actionType.toLowerCase(),
       "content": comment.text,
       "follow": formattedDate,
-      "button": "Update",
+      "button": "Create",
     });
-    print(response.body);
+    print(response);
 
     if (json.decode(response.body) == 0) {
       Fluttertoast.showToast(
-          msg: "Data successfully upladed.", toastLength: Toast.LENGTH_SHORT);
-      Navigator.of(context).pushNamed("action");
-      // Navigator.of(context).pop();
-      // Navigator.of(context).pop();
+          msg: "Data successfully created.", toastLength: Toast.LENGTH_SHORT);
+      Navigator.of(context).pop();
     } else {
       Fluttertoast.showToast(msg: "error", toastLength: Toast.LENGTH_SHORT);
     }
@@ -159,7 +95,6 @@ class _EditActionState extends State<EditAction> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60.0), // here the desired height
             child: AppBar(
@@ -167,7 +102,7 @@ class _EditActionState extends State<EditAction> {
               centerTitle: true,
               title: Center(
                   child: Text(
-                'Edit Action',
+                'Add Action',
                 style: TextStyle(fontWeight: FontWeight.bold),
               )),
               actions: [
@@ -198,54 +133,7 @@ class _EditActionState extends State<EditAction> {
           children: [
             textbuild('What type of update is this?'),
             Container(
-              margin: EdgeInsets.only(left: 30, right: 30, top: 5),
-              child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: BorderSide(color: Colors.black, width: 1.0)),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
-                  ),
-                ),
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Colors.blue,
-                ),
-                iconSize: 25,
-                isExpanded: true,
-                // value: typeUpdate,
-                items: [
-                  "I called",
-                  "I sent email",
-                  'I sent Whatsapp',
-                  'I did video call',
-                  'I met the person',
-                  'just an update',
-                  'Successfully closed'
-                ]
-                    .map((label) => DropdownMenuItem(
-                        child: Text(
-                          label.toString(),
-                        ),
-                        value: label))
-                    .toList(),
-                hint: Text(
-                  typeUpdate = widget.list['type'],
-                  style: TextStyle(color: Colors.blueAccent[100], fontSize: 14),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    // typeUpdate = value;
-                  });
-                },
-              ),
-            ),
-            textbuild('Comments'),
-            bulidTextField(' Comments', comment),
-            textbuild('Next course of action?'),
-            Container(
+              height: 55,
               margin: EdgeInsets.only(left: 30, right: 30, top: 5),
               child: DropdownButtonFormField<dynamic>(
                 decoration: InputDecoration(
@@ -263,7 +151,57 @@ class _EditActionState extends State<EditAction> {
                 ),
                 iconSize: 25,
                 isExpanded: true,
-                // value: actionType,
+                value: typeUpdate,
+                items: [
+                  "I called ",
+                  "I sent email",
+                  'I sent Whatsapp',
+                  'I did video call',
+                  'I met the person',
+                  'just an update ',
+                  'Closed'
+                ]
+                    .map((label) => DropdownMenuItem(
+                          child: Text(
+                            label.toString(),
+                          ),
+                          value: label,
+                        ))
+                    .toList(),
+                hint: Text(
+                  'Select Type',
+                  style: TextStyle(color: Colors.blueAccent[100], fontSize: 14),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    typeUpdate = value;
+                  });
+                },
+              ),
+            ),
+            textbuild('Comments'),
+            bulidTextField(' Comments', comment),
+            textbuild('Next course of action?'),
+            Container(
+              height: 55,
+              margin: EdgeInsets.only(left: 30, right: 30, top: 5),
+              child: DropdownButtonFormField<dynamic>(
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(color: Colors.black, width: 1.0)),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(color: Colors.grey, width: 1.0),
+                  ),
+                ),
+                icon: Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.blue,
+                ),
+                iconSize: 25,
+                isExpanded: true,
+                value: actionType,
                 items: [
                   "Call",
                   "Email",
@@ -280,7 +218,7 @@ class _EditActionState extends State<EditAction> {
                         ))
                     .toList(),
                 hint: Text(
-                  actionType = widget.list['medium'],
+                  'Select Type',
                   style: TextStyle(color: Colors.blueAccent[100], fontSize: 14),
                 ),
                 onChanged: (value) {
@@ -295,7 +233,6 @@ class _EditActionState extends State<EditAction> {
             ),
             Container(
               height: 200,
-              color: Colors.white,
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.dateAndTime,
                 initialDateTime: today,
@@ -306,60 +243,33 @@ class _EditActionState extends State<EditAction> {
                 minuteInterval: 1,
               ),
             ),
-            Column(
-              children: [
-                Container(
-                  height: 40,
-                  width: 170,
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-
-                    onPressed: () {
-                      updateche(idUser);
-                    },
-                    // Refer step 3
-                    child: Text(
-                      'Update Action',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold),
-                    ),
-
-                    color: Colors.blue,
-                  ),
+            Container(
+              // color: Colors.white,
+              color: Colors.white,
+              margin: EdgeInsets.only(top: 15, bottom: 15, left: 80, right: 60),
+              height: 40,
+              width: 170,
+              child: MaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-              ],
+                onPressed: () {
+                  setState(() {
+                    updateche(idUser);
+                  });
+                },
+                // Refer step 3
+                child: Text(
+                  'Create New Action',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
+
+                color: Colors.blue,
+              ),
             ),
-            // Container(
-            //   color: Colors.white,
-            //   margin: EdgeInsets.only(top: 15, bottom: 15, left: 80, right: 60),
-            //   height: 40,
-            //   width: 170,
-            //   child: MaterialButton(
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(10.0),
-            //     ),
-
-            //     onPressed: () {
-            //       setState(() {
-            //         updateche(idUser);
-            //       });
-            //     },
-            //     // Refer step 3
-            //     child: Text(
-            //       "Update",
-            //       style: TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 14,
-            //           fontWeight: FontWeight.bold),
-            //     ),
-
-            //     color: Colors.blue,
-            //   ),
-            // ),
           ],
         ));
   }
@@ -381,12 +291,13 @@ class _EditActionState extends State<EditAction> {
     return Container(
       // height: 55,
       margin: EdgeInsets.only(left: 30, right: 30, top: 5),
+      // padding: EdgeInsets.all(0),
       child: TextField(
+        controller: mycontroller,
         minLines: 1,
-        maxLines: 50,
+        maxLines: 5,
         // ignore: deprecated_member_use
         maxLengthEnforced: true,
-        controller: mycontroller,
         decoration: new InputDecoration(
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),

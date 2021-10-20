@@ -231,10 +231,8 @@ class _ActionListState extends State<ActionList> {
                                                       child: Text(
                                                         list[index]['medium'],
                                                         style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                          fontSize: 15,
+                                                        ),
                                                         textAlign:
                                                             TextAlign.right,
                                                         overflow:
@@ -252,16 +250,16 @@ class _ActionListState extends State<ActionList> {
                                                     flex: 1,
                                                     child: Container(
                                                       padding: EdgeInsets.only(
-                                                          left: 10,
-                                                          top: 5,
-                                                          bottom: 5),
+                                                        left: 10,
+                                                        top: 10,
+                                                      ),
                                                       child: Text(
                                                         list[index]['follow']
                                                             .substring(0, 10),
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .grey[500],
-                                                            fontSize: 16,
+                                                            fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
@@ -272,27 +270,25 @@ class _ActionListState extends State<ActionList> {
                                                         softWrap: false,
                                                       ),
                                                     )),
-                                                // Expanded(
-                                                //     flex: 1,
-                                                //     child: Container(
-                                                //       padding: EdgeInsets.only(
-                                                //           right: 20,
-                                                //           top: 5,
-                                                //           bottom: 5),
-                                                //       child: Text(
-                                                //         list[index]['medium'],
-                                                //         style: TextStyle(
-                                                //             color: Colors.grey,
-                                                //             fontWeight:
-                                                //                 FontWeight
-                                                //                     .bold),
-                                                //         textAlign:
-                                                //             TextAlign.right,
-                                                //         overflow:
-                                                //             TextOverflow.fade,
-                                                //         softWrap: false,
-                                                //       ),
-                                                //     )),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Container(
+                                                      padding: EdgeInsets.only(
+                                                          right: 30,
+                                                          bottom: 20),
+                                                      child: Text(
+                                                        list[index]['follow']
+                                                            .substring(10, 16),
+                                                        style: TextStyle(
+                                                          color: Colors.blue,
+                                                        ),
+                                                        textAlign:
+                                                            TextAlign.right,
+                                                        overflow:
+                                                            TextOverflow.fade,
+                                                        softWrap: false,
+                                                      ),
+                                                    )),
                                               ],
                                             ),
                                           ),

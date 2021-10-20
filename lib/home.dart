@@ -108,52 +108,7 @@ class _HomeState extends State<Home> {
           bottomNavigationBar: MyNavigationBar('home'),
           body: Column(
             children: [
-              // Expanded(
-              //   flex: 1,
-              //   child: Container(
-              //       margin: EdgeInsets.only(top: 10, left: 5, right: 5),
-              //       height: 50,
-              //       decoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(10),
-              //           // color: Colors.white,
-              //           gradient: LinearGradient(
-              //               begin: Alignment.bottomLeft,
-              //               end: Alignment.topLeft,
-              //               colors: [
-              //                 Colors.white70,
-              //                 Colors.white,
-              //               ]),
-              //           boxShadow: [
-              //             BoxShadow(
-              //               blurRadius: 1,
-              //               color: Colors.blue,
-              //               spreadRadius: 1,
-              //               offset: Offset(0, 0), // Shadow position
-              //             ),
-              //           ]),
-              //       child: Row(
-              //         children: [
-              //           Expanded(
-              //               flex: 1,
-              //               child: Text(
-              //                 'Client Name',
-              //                 textAlign: TextAlign.center,
-              //               )),
-              //           Expanded(
-              //               flex: 1,
-              //               child: Text(
-              //                 'Company',
-              //                 textAlign: TextAlign.center,
-              //               )),
-              //           // Expanded(
-              //           //     flex: 1,
-              //           //     child: Text(
-              //           //       'Email',
-              //           //       textAlign: TextAlign.center,
-              //           //     )),
-              //         ],
-              //       )),
-              // ),
+             
               Expanded(
                 child: FutureBuilder(
                   future: getAllData(idUser),
@@ -283,16 +238,7 @@ class _HomeState extends State<Home> {
                                             bottom: BorderSide(
                                           color: Colors.black12,
                                         )),
-                                        // color: Colors.white,
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //     blurRadius: 1,
-                                        //     color: Colors.black12,
-                                        //     spreadRadius: 1,
-                                        //     offset:
-                                        //         Offset(0, 0), // Shadow position
-                                        //   ),
-                                        // ]
+                                        
                                       ),
                                       child: Column(
                                         children: [
@@ -371,7 +317,7 @@ class _HomeState extends State<Home> {
                                                     child: Container(
                                                       padding: EdgeInsets.only(
                                                           right: 10,
-                                                          bottom: 21),
+                                                          bottom: 18),
                                                       child: Text(
                                                         list[index]['hp'],
                                                         style: TextStyle(

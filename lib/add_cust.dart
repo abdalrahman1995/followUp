@@ -9,7 +9,7 @@ import 'dart:developer';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
 String idUser = '';
-List BackendService = ['asa,sdfds,sdfsd,sdfdsf,sdfs'];
+List backendService = ['asa,sdfds,sdfsd,sdfdsf,sdfs'];
 
 class AddCust extends StatefulWidget {
   AddCust({Key? key}) : super(key: key);
@@ -180,7 +180,7 @@ class _AddCustState extends State<AddCust> {
                         ),
                       )),
                   suggestionsCallback: (pattern) async {
-                    return BackendService;
+                    return backendService;
                   },
                   itemBuilder: (context, suggestion) {
                     return ListTile(
